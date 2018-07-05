@@ -1,9 +1,10 @@
 package com.xxl.emoji;
 
-import com.xxl.emoji.model.Emoji;
-import com.xxl.emoji.fitzpatrick.FitzpatrickAction;
+import com.xxl.emoji.encode.EmojiEncode;
 import com.xxl.emoji.factory.EmojiFactory;
+import com.xxl.emoji.fitzpatrick.FitzpatrickAction;
 import com.xxl.emoji.model.AliasCandidate;
+import com.xxl.emoji.model.Emoji;
 import com.xxl.emoji.model.UnicodeCandidate;
 import com.xxl.emoji.transformer.EmojiTransformer;
 
@@ -17,7 +18,7 @@ import java.util.List;
 public class EmojiTool {
 
 
-    // ------------------------ [encodeUnicode, unicode to others] ------------------------
+    // ------------------------ [encode unicode emoji] ------------------------
 
     /**
      * detects all unicode emojis, and replaces them with the return value of transformer.transform()
@@ -27,118 +28,25 @@ public class EmojiTool {
      * @param transformer   emoji transformer to apply to each emoji
      * @return              input string with all emojis transformed
      */
-    public static String encodeUnicode(String input, EmojiTransformer transformer) {
+    public static String encodeUnicode(String input, FitzpatrickAction fitzpatrickAction, EmojiTransformer transformer) {
         int prev = 0;
         StringBuilder sb = new StringBuilder();
         List<UnicodeCandidate> replacements = EmojiFactory.getUnicodeCandidates(input);
         for (UnicodeCandidate candidate : replacements) {
             sb.append(input.substring(prev, candidate.getEmojiStartIndex()));
 
-            sb.append(transformer.transform(candidate));
+            sb.append(transformer.transform(candidate, fitzpatrickAction));
             prev = candidate.getFitzpatrickEndIndex();
         }
 
         return sb.append(input.substring(prev)).toString();
     }
 
-    public static String encodeUnicode(String input) {
-        return null;
+    public static String encodeUnicode(String input, FitzpatrickAction fitzpatrickAction, EmojiEncode dmojiEncodeType) {
+        return encodeUnicode(input, fitzpatrickAction, dmojiEncodeType.getEmojiTransformer());
     }
 
-    /**
-     * replace emoji unicode by one of their first alias (between 2 ':')
-     *
-     * [unicode emoji >> first alias ]
-     *
-     * @param input
-     * @param fitzpatrickAction     the action to apply for the fitzpatrick modifiers
-     * @return
-     */
-    public static String encodeToAliases(String input, final FitzpatrickAction fitzpatrickAction) {
-
-        EmojiTransformer emojiTransformer = new EmojiTransformer() {
-            public String transform(UnicodeCandidate unicodeCandidate) {
-                switch (fitzpatrickAction) {
-                    default:
-                    case PARSE:
-                        if (unicodeCandidate.hasFitzpatrick()) {
-                            return ":" +
-                                    unicodeCandidate.getEmoji().getAliases().get(0) +
-                                    "|" +
-                                    unicodeCandidate.getFitzpatrickType() +
-                                    ":";
-                        }
-                    case REMOVE:
-                        return ":" +
-                                unicodeCandidate.getEmoji().getAliases().get(0) +
-                                ":";
-                    case IGNORE:
-                        return ":" +
-                                unicodeCandidate.getEmoji().getAliases().get(0) +
-                                ":" +
-                                unicodeCandidate.getFitzpatrickUnicode();
-                }
-            }
-        };
-
-        return encodeUnicode(input, emojiTransformer);
-    }
-
-
-    /**
-     * replace unicode emoji by their html representation.
-     *
-     * [unicode emoji >> html hex ]
-     *
-     * @param input
-     * @param fitzpatrickAction the action to apply for the fitzpatrick modifiers
-     * @return
-     */
-    public static String encodeToHtmlDecimal(String input, final FitzpatrickAction fitzpatrickAction) {
-        EmojiTransformer emojiTransformer = new EmojiTransformer() {
-            public String transform(UnicodeCandidate unicodeCandidate) {
-                switch (fitzpatrickAction) {
-                    default:
-                    case PARSE:
-                    case REMOVE:
-                        return unicodeCandidate.getEmoji().getHtmlDecimal();    // parse+remove, will deletec modifier
-                    case IGNORE:
-                        return unicodeCandidate.getEmoji().getHtmlDecimal() + unicodeCandidate.getFitzpatrickUnicode();     // IGNORE, will ignored and remain modifier
-                }
-            }
-        };
-
-        return encodeUnicode(input, emojiTransformer);
-    }
-
-    /**
-     * replace unicode emoji by their html hex representation
-     *
-     * [unicode emoji >> html hex ]
-     *
-     * @param input
-     * @param fitzpatrickAction     the action to apply for the fitzpatrick modifiers
-     * @return
-     */
-    public static String encodeToHtmlHexadecimal(String input, final FitzpatrickAction fitzpatrickAction) {
-        EmojiTransformer emojiTransformer = new EmojiTransformer() {
-            public String transform(UnicodeCandidate unicodeCandidate) {
-                switch (fitzpatrickAction) {
-                    default:
-                    case PARSE:
-                    case REMOVE:
-                        return unicodeCandidate.getEmoji().getHtmlHexadecimal();
-                    case IGNORE:
-                        return unicodeCandidate.getEmoji().getHtmlHexadecimal() + unicodeCandidate.getFitzpatrickUnicode();
-                }
-            }
-        };
-
-        return encodeUnicode(input, emojiTransformer);
-    }
-
-
-    // ------------------------ [encodeUnicode, unicode removed] ------------------------
+    // ------------------------ [remove unicode emoji] ------------------------
 
     /**
      * remove all emojis
@@ -150,12 +58,12 @@ public class EmojiTool {
      */
     public static String removeAllEmojis(String str) {
         EmojiTransformer emojiTransformer = new EmojiTransformer() {
-            public String transform(UnicodeCandidate unicodeCandidate) {
+            public String transform(UnicodeCandidate unicodeCandidate, FitzpatrickAction fitzpatrickAction) {
                 return "";
             }
         };
 
-        return encodeUnicode(str, emojiTransformer);
+        return encodeUnicode(str, null, emojiTransformer);
     }
 
     /**
@@ -169,7 +77,7 @@ public class EmojiTool {
      */
     public static String removeEmojis(String str, final Collection<Emoji> emojisToRemove) {
         EmojiTransformer emojiTransformer = new EmojiTransformer() {
-            public String transform(UnicodeCandidate unicodeCandidate) {
+            public String transform(UnicodeCandidate unicodeCandidate, FitzpatrickAction fitzpatrickAction) {
                 if (!emojisToRemove.contains(unicodeCandidate.getEmoji())) {
                     return unicodeCandidate.getEmoji().getUnicode() + unicodeCandidate.getFitzpatrickUnicode();
                 }
@@ -177,7 +85,7 @@ public class EmojiTool {
             }
         };
 
-        return encodeUnicode(str, emojiTransformer);
+        return encodeUnicode(str, null, emojiTransformer);
     }
 
     /**
@@ -189,9 +97,9 @@ public class EmojiTool {
      * @param emojisToKeep
      * @return
      */
-    public static String removeAllEmojisExcept(String str, final Collection<Emoji> emojisToKeep) {
+    /*public static String removeAllEmojisExcept(String str, final Collection<Emoji> emojisToKeep) {
         EmojiTransformer emojiTransformer = new EmojiTransformer() {
-            public String transform(UnicodeCandidate unicodeCandidate) {
+            public String transform(UnicodeCandidate unicodeCandidate, FitzpatrickAction fitzpatrickAction) {
                 if (emojisToKeep.contains(unicodeCandidate.getEmoji())) {
                     return unicodeCandidate.getEmoji().getUnicode() + unicodeCandidate.getFitzpatrickUnicode();
                 }
@@ -199,8 +107,8 @@ public class EmojiTool {
             }
         };
 
-        return encodeUnicode(str, emojiTransformer);
-    }
+        return encodeUnicode(str, null, emojiTransformer);
+    }*/
 
 
     /**
@@ -219,7 +127,7 @@ public class EmojiTool {
     }
 
 
-    // ------------------------ [decode, unicode from others] ------------------------
+    // ------------------------ [decode to unicode emoji] ------------------------
 
     /**
      * replace aliases and html representations by their unicode(modifiers).
