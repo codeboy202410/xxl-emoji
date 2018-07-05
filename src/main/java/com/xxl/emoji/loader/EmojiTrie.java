@@ -1,4 +1,6 @@
-package com.xxl.emoji.core;
+package com.xxl.emoji.loader;
+
+import com.xxl.emoji.model.Emoji;
 
 import java.util.Collection;
 import java.util.HashMap;

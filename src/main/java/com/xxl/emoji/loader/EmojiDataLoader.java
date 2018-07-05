@@ -1,6 +1,6 @@
 package com.xxl.emoji.loader;
 
-import com.xxl.emoji.core.Emoji;
+import com.xxl.emoji.model.Emoji;
 
 import java.util.List;
 

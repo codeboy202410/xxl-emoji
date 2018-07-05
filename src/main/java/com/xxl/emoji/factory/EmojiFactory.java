@@ -1,8 +1,8 @@
 package com.xxl.emoji.factory;
 
 import com.xxl.emoji.EmojiTool;
-import com.xxl.emoji.core.Emoji;
-import com.xxl.emoji.core.EmojiTrie;
+import com.xxl.emoji.model.Emoji;
+import com.xxl.emoji.loader.EmojiTrie;
 import com.xxl.emoji.exception.XxlEmojiException;
 import com.xxl.emoji.loader.EmojiDataLoader;
 import com.xxl.emoji.loader.impl.LocalEmojiDataLoader;

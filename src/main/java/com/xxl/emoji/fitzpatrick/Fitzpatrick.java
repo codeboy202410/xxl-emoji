@@ -1,4 +1,4 @@
-package com.xxl.emoji.core;
+package com.xxl.emoji.fitzpatrick;
 
 /**
  * Fitzpatrick scale: https://en.wikipedia.org/wiki/Fitzpatrick_scale

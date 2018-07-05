@@ -1,7 +1,6 @@
 package com.xxl.emoji.model;
 
-import com.xxl.emoji.core.Emoji;
-import com.xxl.emoji.core.Fitzpatrick;
+import com.xxl.emoji.fitzpatrick.Fitzpatrick;
 
 /**
  * unicode candidate

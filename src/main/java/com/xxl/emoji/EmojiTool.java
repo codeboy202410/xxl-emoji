@@ -1,7 +1,7 @@
 package com.xxl.emoji;
 
-import com.xxl.emoji.core.Emoji;
-import com.xxl.emoji.core.FitzpatrickAction;
+import com.xxl.emoji.model.Emoji;
+import com.xxl.emoji.fitzpatrick.FitzpatrickAction;
 import com.xxl.emoji.factory.EmojiFactory;
 import com.xxl.emoji.model.AliasCandidate;
 import com.xxl.emoji.model.UnicodeCandidate;
@@ -41,6 +41,10 @@ public class EmojiTool {
         return sb.append(input.substring(prev)).toString();
     }
 
+    public static String encodeUnicode(String input) {
+        return null;
+    }
+
     /**
      * replace emoji unicode by one of their first alias (between 2 ':')
      *
@@ -51,6 +55,7 @@ public class EmojiTool {
      * @return
      */
     public static String encodeToAliases(String input, final FitzpatrickAction fitzpatrickAction) {
+
         EmojiTransformer emojiTransformer = new EmojiTransformer() {
             public String transform(UnicodeCandidate unicodeCandidate) {
                 switch (fitzpatrickAction) {

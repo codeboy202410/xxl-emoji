@@ -1,6 +1,6 @@
 package com.xxl.emoji.model;
 
-import com.xxl.emoji.core.Fitzpatrick;
+import com.xxl.emoji.fitzpatrick.Fitzpatrick;
 
 /**
  * alias candidate

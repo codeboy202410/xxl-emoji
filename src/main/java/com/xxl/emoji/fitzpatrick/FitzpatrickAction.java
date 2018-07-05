@@ -1,4 +1,4 @@
-package com.xxl.emoji.core;
+package com.xxl.emoji.fitzpatrick;
 
 /**
  * Fitzpatrick action

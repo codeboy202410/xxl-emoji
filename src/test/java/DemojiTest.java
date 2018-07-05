@@ -1,5 +1,5 @@
 import com.xxl.emoji.EmojiTool;
-import com.xxl.emoji.core.FitzpatrickAction;
+import com.xxl.emoji.fitzpatrick.FitzpatrickAction;
 
 public class DemojiTest {
 
