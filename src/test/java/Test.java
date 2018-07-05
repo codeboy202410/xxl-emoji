@@ -1,4 +1,4 @@
-import com.xxl.emoji.EmojiParser;
+import com.xxl.emoji.EmojiTool;
 import com.xxl.emoji.core.FitzpatrickAction;
 
 public class Test {
@@ -8,20 +8,20 @@ public class Test {
         String str = "An 😀awesome 😃string with a few 😉emojis!";
 
         // alias
-        String str1 = EmojiParser.parseToAliases(str, FitzpatrickAction.PARSE);
+        String str1 = EmojiTool.parseToAliases(str, FitzpatrickAction.PARSE);
         System.out.println(str1);
-        System.out.println(EmojiParser.parseToUnicode(str1));   // back to emoji
+        System.out.println(EmojiTool.parseToUnicode(str1));   // back to emoji
 
         // to html decimal
-        String str2 = EmojiParser.parseToHtmlDecimal(str, FitzpatrickAction.PARSE);
+        String str2 = EmojiTool.parseToHtmlDecimal(str, FitzpatrickAction.PARSE);
         System.out.println(str2);
-        System.out.println(EmojiParser.parseToUnicode(str2));
+        System.out.println(EmojiTool.parseToUnicode(str2));
 
 
         // to html hex decimal
-        String str3 = EmojiParser.parseToHtmlHexadecimal(str, FitzpatrickAction.PARSE);
+        String str3 = EmojiTool.parseToHtmlHexadecimal(str, FitzpatrickAction.PARSE);
         System.out.println(str3);
-        System.out.println(EmojiParser.parseToUnicode(str3));
+        System.out.println(EmojiTool.parseToUnicode(str3));
     }
 
 }

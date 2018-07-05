@@ -1,6 +1,6 @@
 package com.xxl.emoji.factory;
 
-import com.xxl.emoji.EmojiParser;
+import com.xxl.emoji.EmojiTool;
 import com.xxl.emoji.core.Emoji;
 import com.xxl.emoji.core.EmojiTrie;
 import com.xxl.emoji.exception.XxlEmojiException;
@@ -111,7 +111,7 @@ public class EmojiFactory {
     }
 
     public static boolean isOnlyEmojis(String string) {
-        return string != null && EmojiParser.removeAllEmojis(string).length()==0;
+        return string != null && EmojiTool.removeAllEmojis(string).length()==0;
     }
 
     public static EmojiTrie.Matches isEmoji(char[] sequence) {

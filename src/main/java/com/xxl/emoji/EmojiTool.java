@@ -14,7 +14,7 @@ import java.util.List;
 /**
  * emoji tool
  */
-public class EmojiParser {
+public class EmojiTool {
 
 
     // ------------------------ [unicode to others] ------------------------
