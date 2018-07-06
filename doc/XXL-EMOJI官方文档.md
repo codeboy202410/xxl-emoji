@@ -8,7 +8,7 @@
 ## 一、简介
 
 ### 1.1 概述
-XXL-EMOJI 是一个灵活可扩展的Emoji库，可快速实现Emoji表情的编解码.
+XXL-EMOJI 是一个灵活可扩展的Emoji表情编解码库，可快速实现Emoji表情的编解码.
 
 ### 1.2 特性
 - 1、简洁：API直观简洁，一分钟上手；
@@ -77,7 +77,7 @@ System.out.println("hexdecimal decode: " + EmojiTool.decodeToUnicode(hexdecimal)
 
 ### 3.1 功能定位
 
-XXL-EMOJI 是一个灵活可扩展的Emoji库，可快速实现Emoji表情的编解码.
+XXL-EMOJI 是一个灵活可扩展的Emoji表情编解码库，可快速实现Emoji表情的编解码.
 
 ### 3.2 Emoji编码类型
 
