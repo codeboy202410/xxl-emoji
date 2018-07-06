@@ -107,9 +107,11 @@ public static List<String> findEmojis(String input) | 查找输入字符转中�
 - 3、别名自定义：支持为Emoji自定义别名；
 - 4、实时性：实时收录最新发布的Emoji；
 
+### 版本 V1.0.1，新特性[迭代中]
 
 ### TODO LIST
 - 1、Emoji远程编解码服务；
+
 
 ## 五、其他
 
