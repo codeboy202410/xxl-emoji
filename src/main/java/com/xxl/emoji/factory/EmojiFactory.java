@@ -26,6 +26,10 @@ public class EmojiFactory {
 
     private static EmojiDataLoader emojiLoader = new LocalEmojiDataLoader();
 
+    public static void setEmojiLoader(EmojiDataLoader emojiLoader) {
+        EmojiFactory.emojiLoader = emojiLoader;
+    }
+
     public static void loadEmoji(){
         List<Emoji> emojis = emojiLoader.loadEmojiData();
         if (emojis==null || emojis.size()==0) {
