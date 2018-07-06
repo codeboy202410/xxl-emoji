@@ -44,20 +44,41 @@ public class EmojiTool {
         return sb.append(input.substring(prev)).toString();
     }
 
-    public static String encodeUnicode(String input, EmojiEncode dmojiEncodeType, FitzpatrickAction fitzpatrickAction) {
-        if (dmojiEncodeType == null) {
-            dmojiEncodeType = EmojiEncode.ALIASES;
+    /**
+     * encode emoji unicode
+     *
+     * @param input
+     * @param emojiEncode
+     * @param fitzpatrickAction
+     * @return
+     */
+    public static String encodeUnicode(String input, EmojiEncode emojiEncode, FitzpatrickAction fitzpatrickAction) {
+        if (emojiEncode == null) {
+            emojiEncode = EmojiEncode.ALIASES;
         }
         if (fitzpatrickAction == null) {
             fitzpatrickAction = FitzpatrickAction.PARSE;
         }
-        return encodeUnicode(input, dmojiEncodeType.getEmojiTransformer(), fitzpatrickAction);
+        return encodeUnicode(input, emojiEncode.getEmojiTransformer(), fitzpatrickAction);
     }
 
+    /**
+     * encode emoji unicode
+     *
+     * @param input
+     * @param emojiEncode
+     * @return
+     */
     public static String encodeUnicode(String input, EmojiEncode emojiEncode) {
         return encodeUnicode(input, emojiEncode, FitzpatrickAction.PARSE);
     }
 
+    /**
+     * encode emoji unicode
+     *
+     * @param input
+     * @return
+     */
     public static String encodeUnicode(String input) {
         return encodeUnicode(input, EmojiEncode.ALIASES);
     }

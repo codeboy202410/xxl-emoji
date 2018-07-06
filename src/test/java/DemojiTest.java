@@ -18,12 +18,12 @@ public class DemojiTest {
         System.out.println("\naliases encode: " + aliases);
         System.out.println("aliases decode: " + EmojiTool.decodeToUnicode(aliases));
 
-        // to html decimal
+        // html decimal
         String decimal = EmojiTool.encodeUnicode(input, EmojiEncode.HTML_DECIMAL);
         System.out.println("\ndecimal encode: " + decimal);
         System.out.println("decimal decode: " + EmojiTool.decodeToUnicode(decimal));
 
-        // to html hex decimal
+        // html hex decimal
         String hexdecimal = EmojiTool.encodeUnicode(input, EmojiEncode.HTML_HEX_DECIMAL);
         System.out.println("\nhexdecimal encode: " + hexdecimal);
         System.out.println("hexdecimal decode: " + EmojiTool.decodeToUnicode(hexdecimal));
