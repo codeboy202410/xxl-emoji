@@ -45,7 +45,7 @@ public class LocalEmojiDataLoader extends EmojiDataLoader {
                         continue;
                     }
 
-                    String emojiChar = String.valueOf(emojiItemMap.get("emojiChar"));
+                    String emoji = String.valueOf(emojiItemMap.get("emoji"));
                     String unicode = String.valueOf(emojiItemMap.get("unicode"));
                     String description = String.valueOf(emojiItemMap.get("description"));
 
@@ -59,7 +59,7 @@ public class LocalEmojiDataLoader extends EmojiDataLoader {
                     }
 
                     boolean supports_fitzpatrick = false;
-                    if (emojiItemMap.containsKey("supports_fitzpatrick") && emojiItemMap.get("supports_fitzpatrick") instanceof Boolean) {
+                    if (emojiItemMap.containsKey("supports_fitzpatrick")) {
                         supports_fitzpatrick = Boolean.valueOf(String.valueOf(emojiItemMap.get("supports_fitzpatrick")));
                     }
 
