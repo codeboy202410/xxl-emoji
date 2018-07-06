@@ -28,7 +28,7 @@ public class EmojiTool {
      * @param transformer   emoji transformer to apply to each emoji
      * @return              input string with all emojis transformed
      */
-    public static String encodeUnicode(String input, FitzpatrickAction fitzpatrickAction, EmojiTransformer transformer) {
+    public static String encodeUnicode(String input, EmojiTransformer transformer, FitzpatrickAction fitzpatrickAction) {
         int prev = 0;
         StringBuilder sb = new StringBuilder();
         List<UnicodeCandidate> replacements = EmojiFactory.getUnicodeCandidates(input);
@@ -42,19 +42,22 @@ public class EmojiTool {
         return sb.append(input.substring(prev)).toString();
     }
 
-    public static String encodeUnicode(String input, FitzpatrickAction fitzpatrickAction, EmojiEncode dmojiEncodeType) {
+    public static String encodeUnicode(String input, EmojiEncode dmojiEncodeType, FitzpatrickAction fitzpatrickAction) {
         if (dmojiEncodeType == null) {
             dmojiEncodeType = EmojiEncode.ALIASES;
         }
-        return encodeUnicode(input, fitzpatrickAction, dmojiEncodeType.getEmojiTransformer());
+        if (fitzpatrickAction == null) {
+            fitzpatrickAction = FitzpatrickAction.PARSE;
+        }
+        return encodeUnicode(input, dmojiEncodeType.getEmojiTransformer(), fitzpatrickAction);
     }
 
-    public static String encodeUnicode(String input, EmojiEncode dmojiEncodeType) {
-        return encodeUnicode(input, null, dmojiEncodeType);
+    public static String encodeUnicode(String input, EmojiEncode emojiEncode) {
+        return encodeUnicode(input, emojiEncode, FitzpatrickAction.PARSE);
     }
 
     public static String encodeUnicode(String input) {
-        return encodeUnicode(input, null, EmojiEncode.ALIASES);
+        return encodeUnicode(input, EmojiEncode.ALIASES);
     }
 
 
@@ -132,7 +135,7 @@ public class EmojiTool {
             }
         };
 
-        return encodeUnicode(input, null, emojiTransformer);
+        return encodeUnicode(input, emojiTransformer, null);
     }
 
 

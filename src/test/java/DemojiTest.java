@@ -1,6 +1,5 @@
 import com.xxl.emoji.EmojiTool;
 import com.xxl.emoji.encode.EmojiEncode;
-import com.xxl.emoji.fitzpatrick.FitzpatrickAction;
 
 public class DemojiTest {
 
@@ -10,17 +9,17 @@ public class DemojiTest {
         System.out.println("unicode：" + input);
 
         // alias
-        String aliases = EmojiTool.encodeUnicode(input, FitzpatrickAction.PARSE, EmojiEncode.ALIASES);
+        String aliases = EmojiTool.encodeUnicode(input, EmojiEncode.ALIASES);
         System.out.println("\naliases encode: " + aliases);
         System.out.println("aliases decode: " + EmojiTool.decodeToUnicode(aliases));
 
         // to html decimal
-        String decimal = EmojiTool.encodeUnicode(input, FitzpatrickAction.PARSE, EmojiEncode.HTML_DECIMAL);
+        String decimal = EmojiTool.encodeUnicode(input, EmojiEncode.HTML_DECIMAL);
         System.out.println("\ndecimal encode: " + decimal);
         System.out.println("decimal decode: " + EmojiTool.decodeToUnicode(decimal));
 
         // to html hex decimal
-        String hexdecimal = EmojiTool.encodeUnicode(input, FitzpatrickAction.PARSE, EmojiEncode.HTML_HEX_DECIMAL);
+        String hexdecimal = EmojiTool.encodeUnicode(input, EmojiEncode.HTML_HEX_DECIMAL);
         System.out.println("\nhexdecimal encode: " + hexdecimal);
         System.out.println("hexdecimal decode: " + EmojiTool.decodeToUnicode(hexdecimal));
 
