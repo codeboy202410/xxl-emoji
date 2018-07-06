@@ -4,6 +4,8 @@ import com.xxl.emoji.fitzpatrick.Fitzpatrick;
 
 /**
  * alias candidate
+ *
+ * @author xuxueli 2018-07-06 20:15:22
  */
 public class AliasCandidate {
     public final String fullString;

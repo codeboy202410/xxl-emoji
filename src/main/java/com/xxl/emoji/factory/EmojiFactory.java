@@ -15,6 +15,8 @@ import java.util.regex.Pattern;
 
 /**
  * emoji factory
+ *
+ * @author xuxueli 2018-07-06 20:15:22
  */
 public class EmojiFactory {
 

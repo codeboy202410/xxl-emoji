@@ -1,11 +1,16 @@
 import com.xxl.emoji.EmojiTool;
 import com.xxl.emoji.encode.EmojiEncode;
 
+/**
+ * emoji tool test
+ *
+ * @author xuxueli 2018-07-06 20:15:22
+ */
 public class DemojiTest {
 
     public static void main(String[] args) {
 
-        String input = "一朵美丽的茉莉🌹!";
+        String input = "一朵美丽的茉莉🌹";
         System.out.println("unicode：" + input);
 
         // alias

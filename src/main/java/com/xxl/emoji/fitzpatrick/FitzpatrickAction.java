@@ -2,6 +2,8 @@ package com.xxl.emoji.fitzpatrick;
 
 /**
  * Fitzpatrick action
+ *
+ * @author xuxueli 2018-07-06 20:15:22
  */
 public enum FitzpatrickAction {
 

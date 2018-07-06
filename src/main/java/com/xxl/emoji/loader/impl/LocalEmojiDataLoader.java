@@ -14,6 +14,8 @@ import java.util.Map;
 
 /**
  * emoji data loader
+ *
+ * @author xuxueli 2018-07-06 20:15:22
  */
 public class LocalEmojiDataLoader extends EmojiDataLoader {
 

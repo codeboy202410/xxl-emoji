@@ -4,6 +4,8 @@ package com.xxl.emoji.fitzpatrick;
  * Fitzpatrick scale: https://en.wikipedia.org/wiki/Fitzpatrick_scale
  *
  * for Unicode, a numerical classification schema for human skin color.
+ *
+ * @author xuxueli 2018-07-06 20:15:22
  */
 public enum Fitzpatrick {
 
