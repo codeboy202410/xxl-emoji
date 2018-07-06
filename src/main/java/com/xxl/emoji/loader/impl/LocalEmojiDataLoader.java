@@ -41,12 +41,12 @@ public class LocalEmojiDataLoader extends EmojiDataLoader {
 
                     Map<String, Object> emojiItemMap = (Map<String, Object>) emojiItem;
 
-                    if (!emojiItemMap.containsKey("emoji")) {
+                    if (!emojiItemMap.containsKey("unicode")) {
                         continue;
                     }
 
                     String emojiChar = String.valueOf(emojiItemMap.get("emojiChar"));
-                    String emoji = String.valueOf(emojiItemMap.get("emoji"));
+                    String unicode = String.valueOf(emojiItemMap.get("unicode"));
                     String description = String.valueOf(emojiItemMap.get("description"));
 
                     List<String> aliases = null;
@@ -63,7 +63,7 @@ public class LocalEmojiDataLoader extends EmojiDataLoader {
                         supports_fitzpatrick = Boolean.valueOf(String.valueOf(emojiItemMap.get("supports_fitzpatrick")));
                     }
 
-                    Emoji emojiObj = new Emoji(description, supports_fitzpatrick, aliases, tags, emoji);
+                    Emoji emojiObj = new Emoji(description, supports_fitzpatrick, aliases, tags, unicode);
                     emojis.add(emojiObj);
 
                 }
