@@ -51,7 +51,11 @@ XXL-EMOJI 是一个灵活可扩展的Emoji表情编解码库，可快速实现Em
 
 ### 第二步：直接使用
 
-```
+引入Maven依赖，即可直接使用。
+
+可参考以下示例代码：
+
+```java
 String input = "一朵美丽的茉莉🌹";
 System.out.println("unicode：" + input);
 
@@ -70,6 +74,18 @@ String hexdecimal = EmojiTool.encodeUnicode(input, EmojiEncode.HTML_HEX_DECIMAL)
 System.out.println("\nhexdecimal encode: " + hexdecimal);
 System.out.println("hexdecimal decode: " + EmojiTool.decodeToUnicode(hexdecimal));
         
+```
+
+示例代码运行后，日志输入如下：
+```text
+aliases encode: 一朵美丽的茉莉:rose:
+aliases decode: 一朵美丽的茉莉🌹
+
+decimal encode: 一朵美丽的茉莉&#127801;
+decimal decode: 一朵美丽的茉莉🌹
+
+hexdecimal encode: 一朵美丽的茉莉&#x1f339;
+hexdecimal decode: 一朵美丽的茉莉🌹
 ```
 
 ## 三、总体设计
@@ -97,6 +113,10 @@ public static String encodeUnicode(String input) | Emoji表情编码方法，编
 public static String decodeToUnicode(String input) | Emoji表情解码方法，支持针对 "ALIASES、HTML_DECIMAL、HTML_HEX_DECIMAL" 等编码方式解码；
 public static String removeEmojis(String input, final Collection<Emoji> emojisToRemove, final Collection<Emoji> emojisToKeep) | 清除输入字符串中的Emoji数据；
 public static List<String> findEmojis(String input) | 查找输入字符转中的全部Emoji数据列表；
+
+### 3.4、自定义Emoji别名
+略
+
 
 
 ## 四、版本更新日志
