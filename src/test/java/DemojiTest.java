@@ -6,23 +6,24 @@ public class DemojiTest {
 
     public static void main(String[] args) {
 
-        String str = "An 😀awesome 😃string with a few 😉emojis!";
+        String input = "一朵美丽的茉莉🌹!";
+        System.out.println("unicode：" + input);
 
         // alias
-        String str1 = EmojiTool.encodeUnicode(str, FitzpatrickAction.PARSE, EmojiEncode.ALIASES);
-        System.out.println(str1);
-        System.out.println(EmojiTool.decodeToUnicode(str1));   // back to emoji
+        String aliases = EmojiTool.encodeUnicode(input, FitzpatrickAction.PARSE, EmojiEncode.ALIASES);
+        System.out.println("\naliases encode: " + aliases);
+        System.out.println("aliases decode: " + EmojiTool.decodeToUnicode(aliases));
 
         // to html decimal
-        String str2 = EmojiTool.encodeUnicode(str, FitzpatrickAction.PARSE, EmojiEncode.HTML_DECIMAL);
-        System.out.println(str2);
-        System.out.println(EmojiTool.decodeToUnicode(str2));
-
+        String decimal = EmojiTool.encodeUnicode(input, FitzpatrickAction.PARSE, EmojiEncode.HTML_DECIMAL);
+        System.out.println("\ndecimal encode: " + decimal);
+        System.out.println("decimal decode: " + EmojiTool.decodeToUnicode(decimal));
 
         // to html hex decimal
-        String str3 = EmojiTool.encodeUnicode(str, FitzpatrickAction.PARSE, EmojiEncode.HTML_HEX_DECIMAL);
-        System.out.println(str3);
-        System.out.println(EmojiTool.decodeToUnicode(str3));
+        String hexdecimal = EmojiTool.encodeUnicode(input, FitzpatrickAction.PARSE, EmojiEncode.HTML_HEX_DECIMAL);
+        System.out.println("\nhexdecimal encode: " + hexdecimal);
+        System.out.println("hexdecimal decode: " + EmojiTool.decodeToUnicode(hexdecimal));
+
     }
 
 }

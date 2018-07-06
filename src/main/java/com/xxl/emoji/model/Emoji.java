@@ -105,6 +105,7 @@ public class Emoji {
         return this.getUnicode() + fitzpatrick.unicode;
     }
 
+    // effect when equals
     @Override
     public boolean equals(Object other) {
         return !(other == null || !(other instanceof Emoji)) &&

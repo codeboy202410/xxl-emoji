@@ -4,6 +4,7 @@ import com.xxl.emoji.fitzpatrick.FitzpatrickAction;
 import com.xxl.emoji.model.UnicodeCandidate;
 import com.xxl.emoji.transformer.EmojiTransformer;
 
+
 /**
  * emoji encode type
  */
@@ -19,26 +20,27 @@ public enum EmojiEncode {
      */
     ALIASES(new EmojiTransformer() {
         public String transform(UnicodeCandidate unicodeCandidate, FitzpatrickAction fitzpatrickAction) {
-            switch (fitzpatrickAction) {
-                default:
-                case PARSE:
-                    if (unicodeCandidate.hasFitzpatrick()) {
-                        return ":" +
-                                unicodeCandidate.getEmoji().getAliases().get(0) +
-                                "|" +
-                                unicodeCandidate.getFitzpatrickType() +
-                                ":";
-                    }
-                case REMOVE:
-                    return ":" +
-                            unicodeCandidate.getEmoji().getAliases().get(0) +
-                            ":";
-                case IGNORE:
-                    return ":" +
-                            unicodeCandidate.getEmoji().getAliases().get(0) +
-                            ":" +
-                            unicodeCandidate.getFitzpatrickUnicode();
+            if (fitzpatrickAction == null) {
+                fitzpatrickAction = FitzpatrickAction.PARSE;
             }
+
+            if (fitzpatrickAction==FitzpatrickAction.PARSE && unicodeCandidate.hasFitzpatrick()) {
+                return ":" +
+                        unicodeCandidate.getEmoji().getAliases().get(0) +
+                        "|" +
+                        unicodeCandidate.getFitzpatrickType() +
+                        ":";
+            } else if (fitzpatrickAction == FitzpatrickAction.IGNORE) {
+                return ":" +
+                        unicodeCandidate.getEmoji().getAliases().get(0) +
+                        ":" +
+                        unicodeCandidate.getFitzpatrickUnicode();
+            } else {    // REMOVE, default
+                return ":" +
+                        unicodeCandidate.getEmoji().getAliases().get(0) +
+                        ":";
+            }
+
         }
     }),
 
@@ -53,13 +55,14 @@ public enum EmojiEncode {
     HTML_DECIMAL(new EmojiTransformer() {
         @Override
         public String transform(UnicodeCandidate unicodeCandidate, FitzpatrickAction fitzpatrickAction) {
-            switch (fitzpatrickAction) {
-                default:
-                case PARSE:
-                case REMOVE:
-                    return unicodeCandidate.getEmoji().getHtmlDecimal();    // parse+remove, will deletec modifier
-                case IGNORE:
-                    return unicodeCandidate.getEmoji().getHtmlDecimal() + unicodeCandidate.getFitzpatrickUnicode();     // IGNORE, will ignored and remain modifier
+            if (fitzpatrickAction == null) {
+                fitzpatrickAction = FitzpatrickAction.PARSE;
+            }
+
+            if (fitzpatrickAction == FitzpatrickAction.IGNORE) {
+                return unicodeCandidate.getEmoji().getHtmlDecimal() + unicodeCandidate.getFitzpatrickUnicode();     // IGNORE, will ignored and remain modifier
+            } else {    // REMOVE, PARSE, default >> remove
+                return unicodeCandidate.getEmoji().getHtmlDecimal();    // parse+remove, will deletec modifier
             }
         }
     }),
@@ -74,13 +77,14 @@ public enum EmojiEncode {
     HTML_HEX_DECIMAL(new EmojiTransformer() {
         @Override
         public String transform(UnicodeCandidate unicodeCandidate, FitzpatrickAction fitzpatrickAction) {
-            switch (fitzpatrickAction) {
-                default:
-                case PARSE:
-                case REMOVE:
-                    return unicodeCandidate.getEmoji().getHtmlHexadecimal();
-                case IGNORE:
-                    return unicodeCandidate.getEmoji().getHtmlHexadecimal() + unicodeCandidate.getFitzpatrickUnicode();
+            if (fitzpatrickAction == null) {
+                fitzpatrickAction = FitzpatrickAction.PARSE;
+            }
+
+            if (fitzpatrickAction == FitzpatrickAction.IGNORE) {
+                return unicodeCandidate.getEmoji().getHtmlHexadecimal() + unicodeCandidate.getFitzpatrickUnicode();
+            } else {    // REMOVE, PARSE, default >> remove
+                return unicodeCandidate.getEmoji().getHtmlHexadecimal();
             }
         }
     });

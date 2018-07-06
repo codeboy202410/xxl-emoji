@@ -111,7 +111,7 @@ public class EmojiFactory {
     }
 
     public static boolean isOnlyEmojis(String string) {
-        return string != null && EmojiTool.removeAllEmojis(string).length()==0;
+        return string != null && EmojiTool.removeEmojis(string, null, null).length()==0;
     }
 
     public static EmojiTrie.Matches isEmoji(char[] sequence) {

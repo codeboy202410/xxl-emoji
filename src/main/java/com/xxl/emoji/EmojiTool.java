@@ -43,87 +43,18 @@ public class EmojiTool {
     }
 
     public static String encodeUnicode(String input, FitzpatrickAction fitzpatrickAction, EmojiEncode dmojiEncodeType) {
+        if (dmojiEncodeType == null) {
+            dmojiEncodeType = EmojiEncode.ALIASES;
+        }
         return encodeUnicode(input, fitzpatrickAction, dmojiEncodeType.getEmojiTransformer());
     }
 
-    // ------------------------ [remove unicode emoji] ------------------------
-
-    /**
-     * remove all emojis
-     *
-     * [unicode emoji >> remove(provided) ]
-     *
-     * @param str
-     * @return
-     */
-    public static String removeAllEmojis(String str) {
-        EmojiTransformer emojiTransformer = new EmojiTransformer() {
-            public String transform(UnicodeCandidate unicodeCandidate, FitzpatrickAction fitzpatrickAction) {
-                return "";
-            }
-        };
-
-        return encodeUnicode(str, null, emojiTransformer);
+    public static String encodeUnicode(String input, EmojiEncode dmojiEncodeType) {
+        return encodeUnicode(input, null, dmojiEncodeType);
     }
 
-    /**
-     * remove provided emojis
-     *
-     * [unicode emoji >> remove(provided) ]
-     *
-     * @param str
-     * @param emojisToRemove
-     * @return
-     */
-    public static String removeEmojis(String str, final Collection<Emoji> emojisToRemove) {
-        EmojiTransformer emojiTransformer = new EmojiTransformer() {
-            public String transform(UnicodeCandidate unicodeCandidate, FitzpatrickAction fitzpatrickAction) {
-                if (!emojisToRemove.contains(unicodeCandidate.getEmoji())) {
-                    return unicodeCandidate.getEmoji().getUnicode() + unicodeCandidate.getFitzpatrickUnicode();
-                }
-                return "";
-            }
-        };
-
-        return encodeUnicode(str, null, emojiTransformer);
-    }
-
-    /**
-     * remove not provided emojis
-     *
-     * [unicode emoji >> remove(not provided) ]
-     *
-     * @param str
-     * @param emojisToKeep
-     * @return
-     */
-    /*public static String removeAllEmojisExcept(String str, final Collection<Emoji> emojisToKeep) {
-        EmojiTransformer emojiTransformer = new EmojiTransformer() {
-            public String transform(UnicodeCandidate unicodeCandidate, FitzpatrickAction fitzpatrickAction) {
-                if (emojisToKeep.contains(unicodeCandidate.getEmoji())) {
-                    return unicodeCandidate.getEmoji().getUnicode() + unicodeCandidate.getFitzpatrickUnicode();
-                }
-                return "";
-            }
-        };
-
-        return encodeUnicode(str, null, emojiTransformer);
-    }*/
-
-
-    /**
-     * extract emojis
-     *
-     * @param input
-     * @return
-     */
-    public static List<String> extractEmojis(String input) {
-        List<UnicodeCandidate> emojis = EmojiFactory.getUnicodeCandidates(input);
-        List<String> result = new ArrayList<String>();
-        for (UnicodeCandidate emoji : emojis) {
-            result.add(emoji.getEmoji().getUnicode());
-        }
-        return result;
+    public static String encodeUnicode(String input) {
+        return encodeUnicode(input, null, EmojiEncode.ALIASES);
     }
 
 
@@ -165,5 +96,61 @@ public class EmojiTool {
         return result;
     }
 
+
+    // ------------------------ [remove unicode emoji] ------------------------
+
+    /**
+     * remove emojis
+     *
+     * [unicode emoji >> remove ]
+     *
+     * @param input             default remove all
+     * @param emojisToRemove    remove
+     * @param emojisToKeep      not remove
+     * @return
+     */
+    public static String removeEmojis(String input, final Collection<Emoji> emojisToRemove, final Collection<Emoji> emojisToKeep) {
+        EmojiTransformer emojiTransformer = new EmojiTransformer() {
+            public String transform(UnicodeCandidate unicodeCandidate, FitzpatrickAction fitzpatrickAction) {
+
+                boolean ifDelete = true;
+
+                if (emojisToRemove!=null && emojisToRemove.size()>0 && emojisToRemove.contains(unicodeCandidate.getEmoji())) {
+                    ifDelete = true;
+                }
+
+                if (emojisToKeep!=null && emojisToKeep.size()>0 && emojisToKeep.contains(unicodeCandidate.getEmoji())) {
+                    ifDelete = false;
+                }
+
+                if (ifDelete) {
+                    return "";
+                } else {
+                    return unicodeCandidate.getEmoji().getUnicode() + unicodeCandidate.getFitzpatrickUnicode();
+                }
+
+            }
+        };
+
+        return encodeUnicode(input, null, emojiTransformer);
+    }
+
+
+    // ------------------------ [find unicode emoji] ------------------------
+
+    /**
+     * extract emojis
+     *
+     * @param input
+     * @return
+     */
+    public static List<String> findEmojis(String input) {
+        List<UnicodeCandidate> emojis = EmojiFactory.getUnicodeCandidates(input);
+        List<String> result = new ArrayList<String>();
+        for (UnicodeCandidate emoji : emojis) {
+            result.add(emoji.getEmoji().getUnicode());
+        }
+        return result;
+    }
 
 }
