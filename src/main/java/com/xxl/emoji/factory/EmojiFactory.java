@@ -21,8 +21,8 @@ public class EmojiFactory {
     private static List<Emoji> ALL_EMOJIS = null;                   // all emoji
     private static EmojiTrie EMOJI_TRIE = null;                     // tree trie
 
-    private static Map<String, Emoji> EMOJIS_BY_ALIAS = null;       // alias-emoji, 1:1
-    private static Map<String, Set<Emoji>> EMOJIS_BY_TAG = null;    // tag-emoji, 1:N
+    private static Map<String, Emoji> EMOJIS_BY_ALIAS = null;       // alias-emoji, N:1
+    private static Map<String, Set<Emoji>> EMOJIS_BY_TAG = null;    // tag-emoji, N:1
 
     private static EmojiDataLoader emojiLoader = new LocalEmojiDataLoader();
 
