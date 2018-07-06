@@ -50,9 +50,28 @@ XXL-EMOJI 是一个灵活可扩展的Emoji库，可快速实现Emoji表情Unicod
 </dependency>
 ```
 
-### 第二步：定义 "PageVo/页面数据对象"（可选）
+### 第二步：直接使用
 
+```
+String input = "一朵美丽的茉莉🌹";
+System.out.println("unicode：" + input);
 
+// alias：将Emoji表情转换为别名，然后还原；
+String aliases = EmojiTool.encodeUnicode(input, EmojiEncode.ALIASES);
+System.out.println("\naliases encode: " + aliases);
+System.out.println("aliases decode: " + EmojiTool.decodeToUnicode(aliases));
+
+// html decimal：将Emoji表情Unicode数据转换为十进制数据，然后还原；
+String decimal = EmojiTool.encodeUnicode(input, EmojiEncode.HTML_DECIMAL);
+System.out.println("\ndecimal encode: " + decimal);
+System.out.println("decimal decode: " + EmojiTool.decodeToUnicode(decimal));
+
+// html hex decimal：将Emoji表情Unicode数据转换为十六进制数据，然后还原；
+String hexdecimal = EmojiTool.encodeUnicode(input, EmojiEncode.HTML_HEX_DECIMAL);
+System.out.println("\nhexdecimal encode: " + hexdecimal);
+System.out.println("hexdecimal decode: " + EmojiTool.decodeToUnicode(hexdecimal));
+        
+```
 
 ## 三、总体设计
 
@@ -64,7 +83,7 @@ XXL-EMOJI 是一个灵活可扩展的Emoji库，可快速实现Emoji表情Unicod
 
 概念 | 说明
 --- | ---
-EmojiEncode.ALIASES | 将Emoji表情转换为别名，格式为 ":alias:"；
+EmojiEncode.ALIASES | 将Emoji表情转换为别名，格式为 ": alias :"；
 EmojiEncode.HTML_DECIMAL | 将Emoji表情Unicode数据转换为十进制数据；
 EmojiEncode.HTML_HEX_DECIMAL | 将Emoji表情Unicode数据转换为十六进制数据；
 
