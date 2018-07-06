@@ -29,6 +29,7 @@ XXL-EMOJI, A flexible and extensible emoji library for Java.
 
 XXL-EMOJI 是一个灵活可扩展的Emoji表情编解码库，可快速实现Emoji表情的编解码.
 
+
 ## Documentation
 - [中文文档](http://www.xuxueli.com/xxl-emoji/)
 

@@ -40,7 +40,6 @@ XXL-EMOJI 是一个灵活可扩展的Emoji表情编解码库，可快速实现Em
 
 ## 二、快速入门
 
-
 ### 第一步：引入Maven依赖
 ```
 <dependency>
