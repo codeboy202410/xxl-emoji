@@ -96,9 +96,8 @@ public static String encodeUnicode(String input, EmojiEncode emojiEncode, Fitzpa
 public static String encodeUnicode(String input, EmojiEncode emojiEncode) | Emoji表情编码方法，支持自定义编码类型；
 public static String encodeUnicode(String input) | Emoji表情编码方法，编码类型默认为 "ALIASES" ；
 public static String decodeToUnicode(String input) | Emoji表情解码方法，支持针对 "ALIASES、HTML_DECIMAL、HTML_HEX_DECIMAL" 等编码方式解码；
-public static String removeEmojis(String input, final Collection<Emoji> emojisToRemove, final Collection<Emoji> emojisToKeep) | 获取待采集URL数量；
-public static String removeEmojis(String input, final Collection<Emoji> emojisToRemove, final Collection<Emoji> emojisToKeep) | 获取待采集URL数量；
-public static List<String> findEmojis(String input) | 
+public static String removeEmojis(String input, final Collection<Emoji> emojisToRemove, final Collection<Emoji> emojisToKeep) | 清除输入字符串中的Emoji数据；
+public static List<String> findEmojis(String input) | 查找输入字符转中的全部Emoji数据列表；
 
 
 ## 四、版本更新日志
